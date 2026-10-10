@@ -4,7 +4,7 @@
     "description": "Nombre de la extensión"
   },
   "appDesc": {
-    "message": "Extrae y limpia tablas web al instante. Pasa datos limpios a Excel, Google Sheets, JSON, SQL y Markdown sin símbolos de moneda ni errores.",
+    "message": "Extrae, limpia y exporta tablas web a Excel, Google Sheets, CSV, JSON y SQL sin símbolos de moneda ni formatos rotos.",
     "description": "Descripción corta de la extensión"
   },
   "selectTableLabel": {

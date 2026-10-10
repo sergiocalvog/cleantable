@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "CleanTable - Copy Web Tables to Excel & Sheets",
+    "message": "CleanTable - Copy Tables to Excel & Sheets",
     "description": "Name of the extension"
   },
   "appDesc": {
-    "message": "Extract and clean HTML tables instantly. Copy clean data to Excel, Google Sheets, JSON, SQL & Markdown without currency symbols or broken formats.",
+    "message": "Extract, clean and export web tables to Excel, Google Sheets, CSV, JSON and SQL without broken formats or currency symbols.",
     "description": "Short description of the extension"
   },
   "selectTableLabel": {
