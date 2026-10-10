@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - CleanTable Chrome Extension</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #3b82f6;
+      --border: #334155;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      color: #60a5fa;
+      font-size: 2rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+    h2 {
+      color: #93c5fd;
+      font-size: 1.3rem;
+      margin-top: 32px;
+    }
+    p, li {
+      color: #cbd5e1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background-color: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+    }
+    code {
+      background: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #38bdf8;
+    }
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .badge {
+      display: inline-block;
+      background: #064e3b;
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="badge">100% Client-Side & Private</span>
+    <h1>Privacy Policy for CleanTable</h1>
+    <p><strong>Last Updated:</strong> October 10, 2026</p>
+
+    <h2>1. Overview</h2>
+    <p><strong>CleanTable</strong> is an offline, client-side Chrome extension designed to detect, clean, and export web tables into spreadsheets (Excel, Google Sheets, CSV, JSON, SQL, and Markdown). We do <strong>not</strong> collect, store, transmit, or sell any personal data, web browsing history, or website content.</p>
+
+    <h2>2. Zero Data Collection</h2>
+    <ul>
+      <li><strong>No Personal Information:</strong> We do not collect names, email addresses, IP addresses, or device identifiers.</li>
+      <li><strong>No Browsing History:</strong> We do not track, record, or monitor web pages visited.</li>
+      <li><strong>No Table Data Collection:</strong> All table parsing, cleaning, and formatting processes occur strictly in-memory in your local web browser.</li>
+      <li><strong>No Third-Party Analytics:</strong> CleanTable contains zero tracking scripts, telemetry, or advertising SDKs.</li>
+    </ul>
+
+    <h2>3. Chrome Permissions & Purpose</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Permission</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>activeTab</code></td>
+          <td>Grants temporary access to the active webpage when the user clicks the extension popup to detect tables and show live previews.</td>
+        </tr>
+        <tr>
+          <td><code>scripting</code></td>
+          <td>Injects table cleaning and visual highlighting scripts into the current tab upon explicit user interaction.</td>
+        </tr>
+        <tr>
+          <td><code>clipboardWrite</code></td>
+          <td>Allows the 1-click export feature to copy cleaned table data (TSV, CSV, JSON, SQL, Markdown) to your local clipboard.</td>
+        </tr>
+        <tr>
+          <td><code>storage</code></td>
+          <td>Saves user preferences (formatting options and offline license status) locally on your device via <code>chrome.storage.local</code>.</td>
+        </tr>
+        <tr>
+          <td><code>https://api.gumroad.com/*</code></td>
+          <td>Verifies PRO license keys against the Gumroad API only when a user actively enters a license key.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. Remote Code Execution</h2>
+    <p>CleanTable does <strong>not</strong> use any remote code. All scripts and assets are 100% packaged inside the extension archive in full compliance with Manifest V3 policies.</p>
+
+    <h2>5. Contact</h2>
+    <p>If you have any questions, please reach out via GitHub:</p>
+    <p><a href="https://github.com/sergiocalvog/cleantable">https://github.com/sergiocalvog/cleantable</a></p>
+  </div>
+</body>
+</html>
