@@ -9,7 +9,8 @@ node_modules/
 Thumbs.db
 desktop.ini
 
-# Logs and environment
-*.log
-.env
-.env.local
+# Distribution builds
+*.zip
+dist/
+build/
+
