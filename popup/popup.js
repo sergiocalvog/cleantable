@@ -560,28 +560,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      // First attempt to send SCAN_TABLES directly
-      chrome.tabs.sendMessage(activeTabId, { action: 'SCAN_TABLES' }, async (response) => {
-        const lastError = chrome.runtime.lastError;
-        if (lastError || !response || !response.success) {
-          // Script not injected yet; programmatically inject and retry
-          try {
-            await chrome.scripting.executeScript({
-              target: { tabId: activeTabId },
-              files: ['scripts/tableCleaner.js', 'scripts/content.js']
-            });
+      await chrome.scripting.executeScript({
+        target: { tabId: activeTabId },
+        files: ['scripts/tableCleaner.js', 'scripts/content.js']
+      });
+    } catch {
+      // Ignored if already injected or unsupported page
+    }
 
-            chrome.tabs.sendMessage(activeTabId, { action: 'SCAN_TABLES' }, (retryResponse) => {
-              if (chrome.runtime.lastError || !retryResponse || !retryResponse.tables) {
-                showEmptyState();
-              } else {
-                handleScanResult(retryResponse);
-              }
-            });
-          } catch {
-            // Handled silently without console.warn/error to keep chrome://extensions error-free
-            showEmptyState();
-          }
+    try {
+      chrome.tabs.sendMessage(activeTabId, { action: 'SCAN_TABLES' }, (response) => {
+        if (chrome.runtime.lastError || !response || !response.tables) {
+          showEmptyState();
         } else {
           handleScanResult(response);
         }
