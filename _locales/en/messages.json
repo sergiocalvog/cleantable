@@ -1,0 +1,318 @@
+{
+  "appName": {
+    "message": "CleanTable - Copy Web Tables to Excel & Sheets",
+    "description": "Name of the extension"
+  },
+  "appDesc": {
+    "message": "Extract and clean HTML tables instantly. Copy clean data to Excel, Google Sheets, JSON, SQL & Markdown without currency symbols or broken formats.",
+    "description": "Short description of the extension"
+  },
+  "selectTableLabel": {
+    "message": "Detected Tables",
+    "description": "Label for the table selector dropdown"
+  },
+  "noTablesFound": {
+    "message": "No tables detected on this page",
+    "description": "Message displayed when no tables are found"
+  },
+  "noTablesHint": {
+    "message": "Navigate to a page containing HTML or CSS grid tables, or scroll down to load dynamic content.",
+    "description": "Hint for empty state"
+  },
+  "restrictedPageNotice": {
+    "message": "CleanTable cannot run on internal Chrome pages (chrome://) or Chrome Web Store due to browser security. Please open a regular website or local test page.",
+    "description": "Notice for restricted internal pages"
+  },
+  "rescanBtn": {
+    "message": "Rescan Page",
+    "description": "Button to rescan tables"
+  },
+  "highlightTable": {
+    "message": "Highlight on page",
+    "description": "Tooltip for table highlight button"
+  },
+  "livePreview": {
+    "message": "Live Preview",
+    "description": "Section title for table preview"
+  },
+  "previewNotice": {
+    "message": "Showing first 5 rows",
+    "description": "Preview row count indicator"
+  },
+  "cleaningOptions": {
+    "message": "Cleaning Options",
+    "description": "Accordion header for cleaning settings"
+  },
+  "optPurgeCurrency": {
+    "message": "Purge currency symbols & units",
+    "description": "Checkbox to remove currency and measurement units"
+  },
+  "optPurgeCurrencyHint": {
+    "message": "Strips $, €, £, %, kg, lbs, etc., preserving pure numeric values",
+    "description": "Help hint for purge currency"
+  },
+  "optNormalizeNumbers": {
+    "message": "Normalize decimal & thousand separators",
+    "description": "Label for decimal normalization selector"
+  },
+  "numFormatAuto": {
+    "message": "Auto Detect (Recommended)",
+    "description": "Auto detect numeric format"
+  },
+  "numFormatUS": {
+    "message": "US / UK (1,250.50 → 1250.50)",
+    "description": "US decimal format"
+  },
+  "numFormatEU": {
+    "message": "European (1.250,50 → 1250.50)",
+    "description": "European decimal format"
+  },
+  "numFormatNone": {
+    "message": "Keep original separators",
+    "description": "Keep original format"
+  },
+  "optSanitizeInvisible": {
+    "message": "Sanitize invisible chars & line breaks",
+    "description": "Checkbox to strip non-breaking spaces and line breaks"
+  },
+  "optSanitizeInvisibleHint": {
+    "message": "Removes &nbsp;, curly quotes, and internal cell line breaks",
+    "description": "Help hint for sanitization"
+  },
+  "optHeaderCase": {
+    "message": "Header formatting",
+    "description": "Label for header case format"
+  },
+  "headerCaseNone": {
+    "message": "Original (Cleaned & Trimmed)",
+    "description": "Default header casing"
+  },
+  "headerCaseSnake": {
+    "message": "snake_case (database friendly)",
+    "description": "snake_case header casing"
+  },
+  "headerCaseCamel": {
+    "message": "camelCase (code friendly)",
+    "description": "camelCase header casing"
+  },
+  "headerCaseKebab": {
+    "message": "kebab-case (url/tag friendly)",
+    "description": "kebab-case header casing"
+  },
+  "optTrimWhitespace": {
+    "message": "Trim leading & trailing whitespace",
+    "description": "Checkbox to trim whitespace"
+  },
+  "exportTitle": {
+    "message": "One-Click Exports",
+    "description": "Title for exports section"
+  },
+  "btnCopyTsv": {
+    "message": "Copy for Sheets / Excel",
+    "description": "Primary copy button"
+  },
+  "btnCopyCsv": {
+    "message": "Copy CSV",
+    "description": "Button to copy CSV"
+  },
+  "btnDownloadCsv": {
+    "message": "Download CSV",
+    "description": "Button to download CSV file"
+  },
+  "btnCopyJson": {
+    "message": "Copy JSON",
+    "description": "Button to copy JSON"
+  },
+  "btnDownloadJson": {
+    "message": "Download JSON",
+    "description": "Button to download JSON file"
+  },
+  "btnCopySql": {
+    "message": "Copy SQL INSERT",
+    "description": "Button to copy SQL INSERT"
+  },
+  "btnDownloadSql": {
+    "message": "Download SQL",
+    "description": "Button to download SQL file"
+  },
+  "btnCopyMarkdown": {
+    "message": "Copy Markdown",
+    "description": "Button to copy Markdown"
+  },
+  "toastCopiedTsv": {
+    "message": "Copied for Excel & Google Sheets!",
+    "description": "Toast message for TSV copy"
+  },
+  "toastCopiedCsv": {
+    "message": "RFC 4180 CSV copied to clipboard!",
+    "description": "Toast message for CSV copy"
+  },
+  "toastDownloadedCsv": {
+    "message": "CSV file downloaded successfully!",
+    "description": "Toast message for CSV download"
+  },
+  "toastDownloadedJson": {
+    "message": "JSON file downloaded successfully!",
+    "description": "Toast message for JSON download"
+  },
+  "toastDownloadedSql": {
+    "message": "SQL script downloaded successfully!",
+    "description": "Toast message for SQL download"
+  },
+  "toastCopiedJson": {
+    "message": "Structured JSON copied to clipboard!",
+    "description": "Toast message for JSON copy"
+  },
+  "toastCopiedSql": {
+    "message": "SQL INSERT queries copied to clipboard!",
+    "description": "Toast message for SQL copy"
+  },
+  "toastCopiedMd": {
+    "message": "GitHub Flavored Markdown copied!",
+    "description": "Toast message for Markdown copy"
+  },
+  "toastError": {
+    "message": "Failed to copy to clipboard",
+    "description": "Toast error message"
+  },
+  "btnDownloadXlsx": {
+    "message": "Download Excel (.xlsx)",
+    "description": "Button to download Excel xlsx"
+  },
+  "btnAutoPage": {
+    "message": "Auto-Paging",
+    "description": "Button to start auto pagination"
+  },
+  "btnBatchExport": {
+    "message": "Batch Export",
+    "description": "Button to export all tables at once"
+  },
+  "btnStop": {
+    "message": "Stop",
+    "description": "Button to stop auto paging"
+  },
+  "toastDownloadedXlsx": {
+    "message": "Excel (.xlsx) file downloaded successfully!",
+    "description": "Toast message for XLSX download"
+  },
+  "toastBatchExported": {
+    "message": "All tables exported to Excel workbook!",
+    "description": "Toast message for Batch Export"
+  },
+  "toastAutoPageDone": {
+    "message": "Auto-paging finished: scraped {pages} pages ({rows} rows)!",
+    "description": "Toast message when auto-paging completes"
+  },
+  "toastAutoPageNoNext": {
+    "message": "No pagination 'Next' button detected for this table.",
+    "description": "Toast message when no next button is found"
+  },
+  "toastProActivated": {
+    "message": "CleanTable PRO activated successfully!",
+    "description": "Toast when license key activates"
+  },
+  "toastProInvalidKey": {
+    "message": "Invalid code. Enter your 17-character PayPal Transaction ID from your receipt.",
+    "description": "Toast when license key is invalid"
+  },
+  "proModalTitle": {
+    "message": "CleanTable PRO",
+    "description": "Pro modal title"
+  },
+  "proModalSubtitle": {
+    "message": "Unlock professional exports & automated scraping",
+    "description": "Pro modal subtitle"
+  },
+  "proFeat1Title": {
+    "message": "Native Excel (.xlsx)",
+    "description": "Feature 1 title"
+  },
+  "proFeat1Desc": {
+    "message": "True typed numbers and spreadsheets without security warnings.",
+    "description": "Feature 1 description"
+  },
+  "proFeat2Title": {
+    "message": "Smart Auto-Paging",
+    "description": "Feature 2 title"
+  },
+  "proFeat2Desc": {
+    "message": "Automatically traverse pagination and scrape multi-page tables.",
+    "description": "Feature 2 description"
+  },
+  "proFeat3Title": {
+    "message": "Batch Table Export",
+    "description": "Feature 3 title"
+  },
+  "proFeat3Desc": {
+    "message": "Export all tables on the page at once into a multi-tab workbook.",
+    "description": "Feature 3 description"
+  },
+  "proFeat4Title": {
+    "message": "Lifetime License",
+    "description": "Feature 4 title"
+  },
+  "proFeat4Desc": {
+    "message": "One-time payment, no recurring subscriptions or monthly fees.",
+    "description": "Feature 4 description"
+  },
+  "proUrgencyBanner": {
+    "message": "Launch Special: 60% OFF (Limited Time)",
+    "description": "Urgency banner in pro modal"
+  },
+  "proDiscountBadge": {
+    "message": "-60% OFF",
+    "description": "Discount badge tag"
+  },
+  "proPricingCaption": {
+    "message": "One-time lifetime payment · No monthly subscriptions",
+    "description": "Pricing caption guarantee"
+  },
+  "btnPaypalCta": {
+    "message": "Pay $9.99 with PayPal",
+    "description": "PayPal CTA button text"
+  },
+  "paypalSecureNote": {
+    "message": "🔒 Official PayPal secure checkout · Instant unlock",
+    "description": "PayPal secure note"
+  },
+  "licenseInputLabel": {
+    "message": "Already paid? Enter your PayPal Transaction ID:",
+    "description": "License input label"
+  },
+  "proLicensePlaceholder": {
+    "message": "Transaction ID (17 characters)",
+    "description": "License input placeholder"
+  },
+  "paypalTxHint": {
+    "message": "💡 You'll find your Transaction ID (17 alphanumeric characters code) on the PayPal receipt screen or confirmation email.",
+    "description": "PayPal transaction id hint"
+  },
+  "btnActivate": {
+    "message": "Activate",
+    "description": "Activate license button"
+  },
+  "demoKeyHint": {
+    "message": "Master demo key:",
+    "description": "Master key demo hint"
+  },
+  "autoPageSub": {
+    "message": "Extract multi-page tables automatically",
+    "description": "Subtitle for Auto-Paging modal"
+  },
+  "btnCancel": {
+    "message": "Cancel",
+    "description": "Cancel button text"
+  },
+  "btnStartScraping": {
+    "message": "Start Scraping",
+    "description": "Start scraping button text"
+  },
+  "tableStats": {
+    "message": "$ROWS$ rows × $COLS$ cols",
+    "description": "Table dimension badge",
+    "placeholders": {
+      "rows": { "content": "$1" },
+      "cols": { "content": "$2" }
+    }
+  }
+}

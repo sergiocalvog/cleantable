@@ -1,0 +1,318 @@
+{
+  "appName": {
+    "message": "CleanTable - Copiar Tablas a Excel y Sheets",
+    "description": "Nombre de la extensión"
+  },
+  "appDesc": {
+    "message": "Extrae y limpia tablas web al instante. Pasa datos limpios a Excel, Google Sheets, JSON, SQL y Markdown sin símbolos de moneda ni errores.",
+    "description": "Descripción corta de la extensión"
+  },
+  "selectTableLabel": {
+    "message": "Tablas Detectadas",
+    "description": "Etiqueta para el selector de tablas"
+  },
+  "noTablesFound": {
+    "message": "No se detectaron tablas en esta página",
+    "description": "Mensaje cuando no hay tablas"
+  },
+  "noTablesHint": {
+    "message": "Navega a una página con tablas HTML o CSS grid, o haz scroll para cargar contenido dinámico.",
+    "description": "Pista de estado vacío"
+  },
+  "restrictedPageNotice": {
+    "message": "CleanTable no puede ejecutarse en páginas del sistema (chrome://) ni en la Chrome Web Store por seguridad del navegador. Abre una página web o el entorno de pruebas local.",
+    "description": "Mensaje en páginas restringidas"
+  },
+  "rescanBtn": {
+    "message": "Reescanear Página",
+    "description": "Botón para reescanear tablas"
+  },
+  "highlightTable": {
+    "message": "Resaltar en página",
+    "description": "Tooltip del botón de resaltar tabla"
+  },
+  "livePreview": {
+    "message": "Vista Previa en Vivo",
+    "description": "Título de la vista previa"
+  },
+  "previewNotice": {
+    "message": "Mostrando primeras 5 filas",
+    "description": "Indicador de filas en preview"
+  },
+  "cleaningOptions": {
+    "message": "Opciones de Limpieza",
+    "description": "Cabecera del acordeón de opciones"
+  },
+  "optPurgeCurrency": {
+    "message": "Purgar divisas y unidades",
+    "description": "Checkbox para quitar divisas y unidades"
+  },
+  "optPurgeCurrencyHint": {
+    "message": "Elimina $, €, £, %, kg, lbs, etc., manteniendo números limpios",
+    "description": "Pista de purga de divisas"
+  },
+  "optNormalizeNumbers": {
+    "message": "Normalizar decimales y miles",
+    "description": "Etiqueta para selector de decimales"
+  },
+  "numFormatAuto": {
+    "message": "Detección Automática (Recomendado)",
+    "description": "Detección automática"
+  },
+  "numFormatUS": {
+    "message": "EE. UU. / Reino Unido (1,250.50 → 1250.50)",
+    "description": "Formato decimal anglosajón"
+  },
+  "numFormatEU": {
+    "message": "Europeo (1.250,50 → 1250.50)",
+    "description": "Formato decimal europeo"
+  },
+  "numFormatNone": {
+    "message": "Mantener separadores originales",
+    "description": "Mantener formato original"
+  },
+  "optSanitizeInvisible": {
+    "message": "Sanitizar caracteres invisibles y saltos",
+    "description": "Checkbox para limpiar espacios y saltos"
+  },
+  "optSanitizeInvisibleHint": {
+    "message": "Elimina &nbsp;, comillas tipográficas y saltos dentro de celdas",
+    "description": "Pista de sanitización"
+  },
+  "optHeaderCase": {
+    "message": "Formato de cabeceras",
+    "description": "Etiqueta de formato de cabeceras"
+  },
+  "headerCaseNone": {
+    "message": "Original (Limpio y Recortado)",
+    "description": "Formato original"
+  },
+  "headerCaseSnake": {
+    "message": "snake_case (ideal para bases de datos)",
+    "description": "Formato snake_case"
+  },
+  "headerCaseCamel": {
+    "message": "camelCase (ideal para código/JS)",
+    "description": "Formato camelCase"
+  },
+  "headerCaseKebab": {
+    "message": "kebab-case (ideal para URLs/tags)",
+    "description": "Formato kebab-case"
+  },
+  "optTrimWhitespace": {
+    "message": "Recortar espacios en blanco externos",
+    "description": "Checkbox de trim"
+  },
+  "exportTitle": {
+    "message": "Exportaciones de 1 Clic",
+    "description": "Título de sección de exportación"
+  },
+  "btnCopyTsv": {
+    "message": "Copiar para Sheets / Excel",
+    "description": "Botón principal copiar para Excel"
+  },
+  "btnCopyCsv": {
+    "message": "Copiar CSV",
+    "description": "Botón copiar CSV"
+  },
+  "btnDownloadCsv": {
+    "message": "Descargar CSV",
+    "description": "Botón descargar CSV"
+  },
+  "btnCopyJson": {
+    "message": "Copiar JSON",
+    "description": "Botón copiar JSON"
+  },
+  "btnDownloadJson": {
+    "message": "Descargar JSON",
+    "description": "Botón descargar JSON"
+  },
+  "btnCopySql": {
+    "message": "Copiar SQL INSERT",
+    "description": "Botón copiar SQL"
+  },
+  "btnDownloadSql": {
+    "message": "Descargar SQL",
+    "description": "Botón descargar SQL"
+  },
+  "btnCopyMarkdown": {
+    "message": "Copiar Markdown",
+    "description": "Botón copiar Markdown"
+  },
+  "toastCopiedTsv": {
+    "message": "¡Copiado para Excel y Google Sheets!",
+    "description": "Mensaje toast TSV"
+  },
+  "toastCopiedCsv": {
+    "message": "¡CSV RFC 4180 copiado al portapapeles!",
+    "description": "Mensaje toast CSV"
+  },
+  "toastDownloadedCsv": {
+    "message": "¡Archivo CSV descargado con éxito!",
+    "description": "Mensaje toast descarga CSV"
+  },
+  "toastDownloadedJson": {
+    "message": "¡Archivo JSON descargado con éxito!",
+    "description": "Mensaje toast descarga JSON"
+  },
+  "toastDownloadedSql": {
+    "message": "¡Archivo SQL descargado con éxito!",
+    "description": "Mensaje toast descarga SQL"
+  },
+  "toastCopiedJson": {
+    "message": "¡JSON estructurado copiado al portapapeles!",
+    "description": "Mensaje toast JSON"
+  },
+  "toastCopiedSql": {
+    "message": "¡Sentencias SQL INSERT copiadas!",
+    "description": "Mensaje toast SQL"
+  },
+  "toastCopiedMd": {
+    "message": "¡Tabla Markdown GitHub copiada!",
+    "description": "Mensaje toast Markdown"
+  },
+  "toastError": {
+    "message": "Error al copiar al portapapeles",
+    "description": "Mensaje toast de error"
+  },
+  "btnDownloadXlsx": {
+    "message": "Descargar Excel (.xlsx)",
+    "description": "Botón para descargar Excel xlsx"
+  },
+  "btnAutoPage": {
+    "message": "Auto-Paginación",
+    "description": "Botón para iniciar auto paginación"
+  },
+  "btnBatchExport": {
+    "message": "Exportar Todas",
+    "description": "Botón para exportar todas las tablas a la vez"
+  },
+  "btnStop": {
+    "message": "Detener",
+    "description": "Botón para detener la paginación"
+  },
+  "toastDownloadedXlsx": {
+    "message": "¡Archivo Excel (.xlsx) descargado con éxito!",
+    "description": "Mensaje toast descarga XLSX"
+  },
+  "toastBatchExported": {
+    "message": "¡Todas las tablas exportadas al libro Excel!",
+    "description": "Mensaje toast de exportación por lotes"
+  },
+  "toastAutoPageDone": {
+    "message": "¡Auto-paginación lista: {pages} páginas ({rows} filas) extraídas!",
+    "description": "Mensaje al completar auto-paginación"
+  },
+  "toastAutoPageNoNext": {
+    "message": "No se detectó botón 'Siguiente' en esta tabla.",
+    "description": "Mensaje si no hay paginación siguiente"
+  },
+  "toastProActivated": {
+    "message": "🎉 ¡CleanTable PRO activado con éxito!",
+    "description": "Toast activación de clave"
+  },
+  "toastProInvalidKey": {
+    "message": "Código no válido. Introduce el ID de transacción de 17 caracteres de tu recibo de PayPal.",
+    "description": "Toast clave no válida"
+  },
+  "proModalTitle": {
+    "message": "CleanTable PRO",
+    "description": "Título modal Pro"
+  },
+  "proModalSubtitle": {
+    "message": "Desbloquea exportaciones avanzadas y raspado automático",
+    "description": "Subtítulo modal Pro"
+  },
+  "proFeat1Title": {
+    "message": "Excel Nativo (.xlsx)",
+    "description": "Título función 1"
+  },
+  "proFeat1Desc": {
+    "message": "Hojas binarias con números y fórmulas reales sin advertencias.",
+    "description": "Descripción función 1"
+  },
+  "proFeat2Title": {
+    "message": "Auto-Paginación Inteligente",
+    "description": "Título función 2"
+  },
+  "proFeat2Desc": {
+    "message": "Extrae tablas de múltiples páginas automáticamente en 1 clic.",
+    "description": "Descripción función 2"
+  },
+  "proFeat3Title": {
+    "message": "Exportación por Lotes",
+    "description": "Título función 3"
+  },
+  "proFeat3Desc": {
+    "message": "Descarga todas las tablas de la página consolidadas en un libro.",
+    "description": "Descripción función 3"
+  },
+  "proFeat4Title": {
+    "message": "Licencia de por Vida",
+    "description": "Título función 4"
+  },
+  "proFeat4Desc": {
+    "message": "Pago único sin suscripciones ni cuotas recurrentes.",
+    "description": "Descripción función 4"
+  },
+  "proUrgencyBanner": {
+    "message": "Oferta de Lanzamiento: 60% DTO (Por tiempo limitado)",
+    "description": "Banner de urgencia en el modal pro"
+  },
+  "proDiscountBadge": {
+    "message": "-60% DTO",
+    "description": "Insignia de descuento"
+  },
+  "proPricingCaption": {
+    "message": "Pago único de por vida · Sin suscripciones mensuales",
+    "description": "Subtítulo de garantía de pago"
+  },
+  "btnPaypalCta": {
+    "message": "Pagar $9.99 con PayPal",
+    "description": "Texto del botón de pago PayPal"
+  },
+  "paypalSecureNote": {
+    "message": "🔒 Pago seguro oficial de PayPal · Desbloqueo instantáneo",
+    "description": "Nota de seguridad PayPal"
+  },
+  "licenseInputLabel": {
+    "message": "¿Ya has realizado el pago? Introduce tu ID de transacción de PayPal:",
+    "description": "Etiqueta input de licencia"
+  },
+  "proLicensePlaceholder": {
+    "message": "ID de transacción (17 caracteres)",
+    "description": "Placeholder input de licencia"
+  },
+  "paypalTxHint": {
+    "message": "💡 Encontrarás tu ID de transacción (código de 17 caracteres alfanuméricos) en la pantalla final de PayPal o en tu email de recibo.",
+    "description": "Pista para encontrar el ID de transacción PayPal"
+  },
+  "btnActivate": {
+    "message": "Activar",
+    "description": "Botón activar"
+  },
+  "demoKeyHint": {
+    "message": "Clave de demostración:",
+    "description": "Pista clave demo"
+  },
+  "autoPageSub": {
+    "message": "Extrae tablas de múltiples páginas automáticamente",
+    "description": "Subtítulo del modal de auto-paginación"
+  },
+  "btnCancel": {
+    "message": "Cancelar",
+    "description": "Botón cancelar"
+  },
+  "btnStartScraping": {
+    "message": "Iniciar Extracción",
+    "description": "Botón iniciar extracción"
+  },
+  "tableStats": {
+    "message": "$ROWS$ filas × $COLS$ cols",
+    "description": "Badge de dimensiones de la tabla",
+    "placeholders": {
+      "rows": { "content": "$1" },
+      "cols": { "content": "$2" }
+    }
+  }
+}

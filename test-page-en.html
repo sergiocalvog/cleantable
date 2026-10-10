@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CleanTable Extension - English Test & Validation Sandbox</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --accent: #10b981;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 20px 60px 20px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    header.header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: #ffffff;
+      padding: 28px;
+      border-radius: 12px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    header h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header p {
+      color: #94a3b8;
+      font-size: 14px;
+      max-width: 750px;
+    }
+
+    .instruction-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 13px;
+    }
+
+    .step-card strong {
+      display: block;
+      color: #60a5fa;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .test-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    table.demo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    table.demo-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+
+    table.demo-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: #1e293b;
+    }
+
+    table.demo-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.demo-table tr:hover td {
+      background-color: #f8fafc;
+    }
+
+    .num-col {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .tag-active { background: #dcfce7; color: #15803d; }
+    .tag-pending { background: #fef9c3; color: #854d0e; }
+    .tag-canceled { background: #fee2e2; color: #b91c1c; }
+
+    /* Playground Box */
+    .playground-box {
+      background: #ffffff;
+      border: 2px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .playground-box h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #0f172a;
+    }
+
+    .playground-box p {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .playground-box textarea {
+      width: 100%;
+      height: 120px;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 12px;
+      background: #f8fafc;
+      resize: vertical;
+    }
+
+    /* CSS Grid Table simulation */
+    .grid-table {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      background: #fff;
+    }
+
+    .grid-header {
+      background: #f1f5f9;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .grid-cell {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>
+        <span>🌐</span> CleanTable Extension - English Test Suite
+      </h1>
+      <p>
+        Use this interactive test page to verify CleanTable in English: UI translation, clean exports,
+        PRO monetization modal with PayPal, and automated pagination.
+      </p>
+
+      <div class="instruction-steps">
+        <div class="step-card">
+          <strong>Step 1: Open CleanTable</strong>
+          Click the CleanTable puzzle icon in your Chrome toolbar.
+        </div>
+        <div class="step-card">
+          <strong>Step 2: Toggle Language to EN</strong>
+          If CleanTable opens in Spanish, click the <strong>EN</strong> pill button in the top-right header to switch instantly.
+        </div>
+        <div class="step-card">
+          <strong>Step 3: Test PRO Modal & Exports</strong>
+          Click <strong>⭐ PRO</strong> to view the PayPal pricing modal or click <strong>Download Excel (.xlsx)</strong>.
+        </div>
+      </div>
+    </header>
+
+    <!-- TEST 1: SaaS Financial & Revenue Table -->
+    <section class="test-section">
+      <div class="section-title">
+        <span>1. SaaS Subscription Revenue & Financial Metrics</span>
+        <span class="section-badge">HTML Standard &lt;table&gt;</span>
+      </div>
+      <p class="section-desc">
+        Contains currency symbols ($), comma thousands separators, percentages, negative numbers, and status badges.
+      </p>
+
+      <div class="table-container">
+        <table class="demo-table">
+          <thead>
+            <tr>
+              <th>Account Name</th>
+              <th>Tier</th>
+              <th class="num-col">Monthly Billing ($)</th>
+              <th class="num-col">Annual Run Rate</th>
+              <th class="num-col">Growth Margin</th>
+              <th>Status</th>
+              <th>Renewal Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Acme Corporation &nbsp;</td>
+              <td>Enterprise Suite</td>
+              <td class="num-col">$4,850.00</td>
+              <td class="num-col">$58,200.00</td>
+              <td class="num-col">+24.5%</td>
+              <td><span class="tag tag-active">Active</span></td>
+              <td>2026-11-15</td>
+            </tr>
+            <tr>
+              <td>Starlight Media Inc.</td>
+              <td>Professional</td>
+              <td class="num-col">$1,299.50</td>
+              <td class="num-col">$15,594.00</td>
+              <td class="num-col">+12.0%</td>
+              <td><span class="tag tag-active">Active</span></td>
+              <td>2026-12-01</td>
+            </tr>
+            <tr>
+              <td>Quantum Dynamics Ltd.</td>
+              <td>Scale Growth</td>
+              <td class="num-col">$849.00</td>
+              <td class="num-col">$10,188.00</td>
+              <td class="num-col">-3.5%</td>
+              <td><span class="tag tag-pending">Pending</span></td>
+              <td>2026-10-25</td>
+            </tr>
+            <tr>
+              <td>BlueSky Logistics</td>
+              <td>Starter Tier</td>
+              <td class="num-col">$199.00</td>
+              <td class="num-col">$2,388.00</td>
+              <td class="num-col">+5.0%</td>
+              <td><span class="tag tag-active">Active</span></td>
+              <td>2027-01-10</td>
+            </tr>
+            <tr>
+              <td>Apex HyperCloud</td>
+              <td>Enterprise Dedicated</td>
+              <td class="num-col">$12,450.00</td>
+              <td class="num-col">$149,400.00</td>
+              <td class="num-col">+38.2%</td>
+              <td><span class="tag tag-active">Active</span></td>
+              <td>2027-03-31</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TEST 2: Global E-Commerce Product Catalog -->
+    <section class="test-section">
+      <div class="section-title">
+        <span>2. E-Commerce Product Inventory</span>
+        <span class="section-badge">Units & Trim Whitespace</span>
+      </div>
+      <p class="section-desc">
+        Tests stripping measurement units (lbs, units, USD) and trimming extraneous whitespace.
+      </p>
+
+      <div class="table-container">
+        <table class="demo-table">
+          <thead>
+            <tr>
+              <th>SKU Code</th>
+              <th>Product Name</th>
+              <th class="num-col">Unit Price ($)</th>
+              <th class="num-col">Stock Qty</th>
+              <th class="num-col">Unit Weight</th>
+              <th>Warehouse</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SKU-9901</td>
+              <td>Wireless Ergonomic Keyboard</td>
+              <td class="num-col">$149.99</td>
+              <td class="num-col">45 units</td>
+              <td class="num-col">2.15 lbs</td>
+              <td>US-East-1</td>
+            </tr>
+            <tr>
+              <td>SKU-9902</td>
+              <td>UltraWide Curved Display 38"</td>
+              <td class="num-col">$949.00</td>
+              <td class="num-col">18 units</td>
+              <td class="num-col">18.40 lbs</td>
+              <td>US-West-2</td>
+            </tr>
+            <tr>
+              <td>SKU-9903</td>
+              <td>Thunderbolt 4 Multi-Port Dock</td>
+              <td class="num-col">$289.50</td>
+              <td class="num-col">62 units</td>
+              <td class="num-col">1.10 lbs</td>
+              <td>EU-Central-1</td>
+            </tr>
+            <tr>
+              <td>SKU-9904</td>
+              <td>Noise-Canceling ANC Headset</td>
+              <td class="num-col">$349.00</td>
+              <td class="num-col">34 units</td>
+              <td class="num-col">0.85 lbs</td>
+              <td>US-East-1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TEST 3: CSS Grid Table Simulation -->
+    <section class="test-section">
+      <div class="section-title">
+        <span>3. Modern CSS Grid &lt;div&gt; Table</span>
+        <span class="section-badge">Non-Table DOM Scraping</span>
+      </div>
+      <p class="section-desc">
+        Modern web applications often render tables using CSS Grid or Flexbox divs without &lt;table&gt; tags.
+      </p>
+
+      <div class="grid-table" role="table" aria-label="Cloud Server Fleet">
+        <div class="grid-header" role="columnheader">Server Hostname</div>
+        <div class="grid-header" role="columnheader">vCPU Cores</div>
+        <div class="grid-header" role="columnheader">RAM (GB)</div>
+        <div class="grid-header" role="columnheader">Monthly Cost ($)</div>
+
+        <div class="grid-cell" role="cell">prod-api-cluster-01.us</div>
+        <div class="grid-cell" role="cell">32 cores</div>
+        <div class="grid-cell" role="cell">128 GB</div>
+        <div class="grid-cell" role="cell">$480.00</div>
+
+        <div class="grid-cell" role="cell">prod-db-postgres-primary</div>
+        <div class="grid-cell" role="cell">64 cores</div>
+        <div class="grid-cell" role="cell">256 GB</div>
+        <div class="grid-cell" role="cell">$1,250.00</div>
+
+        <div class="grid-cell" role="cell">worker-queue-redis-cache</div>
+        <div class="grid-cell" role="cell">16 cores</div>
+        <div class="grid-cell" role="cell">64 GB</div>
+        <div class="grid-cell" role="cell">$240.00</div>
+      </div>
+    </section>
+
+    <!-- TEST 4: Live Paginated Table (PRO Auto-Paging Test) -->
+    <section class="test-section" id="pagination-test-section">
+      <div class="section-title">
+        <span>4. Multi-Page Paginated Table (PRO Feature: Auto-Paging)</span>
+        <span class="section-badge" style="background: #fef3c7; color: #92400e; border-color: #fde68a;">⭐ Auto-Paging PRO</span>
+      </div>
+      <p class="section-desc">
+        Simulates a multi-page SaaS database across 3 pages. Click <strong>Auto-Paging</strong> in CleanTable
+        to automatically traverse "Next ›", consolidate all pages, and export them into one clean spreadsheet.
+      </p>
+
+      <div class="table-container">
+        <table class="demo-table" id="paginated-products-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Item Description</th>
+              <th>Category</th>
+              <th class="num-col">Price ($)</th>
+              <th class="num-col">In Stock</th>
+            </tr>
+          </thead>
+          <tbody id="paginatedTableBody">
+            <!-- Populated dynamically by JS -->
+          </tbody>
+        </table>
+
+        <!-- Standard pagination bar -->
+        <div class="pagination-controls" style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 10px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+          <span id="pageIndicator" style="font-size: 13px; font-weight: 600; color: #475569;">Page 1 of 3</span>
+          <div style="display: flex; gap: 8px;">
+            <button id="btnPrevPage" class="pagination-btn" style="padding: 6px 14px; font-size: 12px; font-weight: 600; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;" disabled>‹ Previous</button>
+            <button id="btnNextPage" class="pagination-btn next" rel="next" aria-label="Next" style="padding: 6px 14px; font-size: 12px; font-weight: 600; background: #2563eb; color: #ffffff; border: 1px solid #1d4ed8; border-radius: 4px; cursor: pointer;">Next ›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paste Playground -->
+    <div class="playground-box">
+      <h3>Direct Paste Sandbox (Ctrl + V / Cmd + V)</h3>
+      <p>
+        No need to open Excel or Google Sheets. Click any export button in CleanTable
+        (Copy for Sheets, CSV, JSON, SQL or Markdown) and paste here to verify:
+      </p>
+      <textarea id="pasteArea" placeholder="Click here and press Ctrl+V (or Cmd+V) to inspect clean copied tabular data..."></textarea>
+    </div>
+  </div>
+
+  <script>
+    const pagesData = [
+      [
+        ["ITEM-101", "MacBook Pro M3 Max 16\"", "Hardware", "$3,499.00", "12"],
+        ["ITEM-102", "Dell UltraSharp 32\" 4K", "Monitors", "$899.50", "24"],
+        ["ITEM-103", "Mechanical Gaming Keyboard", "Accessories", "$149.99", "80"],
+        ["ITEM-104", "Logitech MX Master 3S", "Accessories", "$99.00", "110"]
+      ],
+      [
+        ["ITEM-105", "Dell PowerEdge R750 Server", "Servers", "$5,250.00", "5"],
+        ["ITEM-106", "Cisco Catalyst 48-Port Switch", "Networking", "$1,480.75", "16"],
+        ["ITEM-107", "Ubiquiti UniFi WiFi 6 AP", "Networking", "$279.00", "42"],
+        ["ITEM-108", "APC Smart-UPS 3000VA", "Power", "$1,120.50", "9"]
+      ],
+      [
+        ["ITEM-109", "CalDigit TS4 Thunderbolt Dock", "Accessories", "$399.00", "48"],
+        ["ITEM-110", "Sony WH-1000XM5 ANC Headphones", "Audio", "$399.90", "35"],
+        ["ITEM-111", "Logitech Brio 4K Webcam", "Video", "$199.00", "60"],
+        ["ITEM-112", "Ergonomic Monitor Desk Arm", "Office", "$129.00", "75"]
+      ]
+    ];
+
+    let currentPage = 0;
+    const tbody = document.getElementById('paginatedTableBody');
+    const pageIndicator = document.getElementById('pageIndicator');
+    const btnPrev = document.getElementById('btnPrevPage');
+    const btnNext = document.getElementById('btnNextPage');
+
+    function renderPage(p) {
+      currentPage = p;
+      tbody.innerHTML = '';
+      pagesData[p].forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row[0]}</td>
+          <td>${row[1]}</td>
+          <td>${row[2]}</td>
+          <td class="num-col">${row[3]}</td>
+          <td class="num-col">${row[4]}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      pageIndicator.textContent = `Page ${p + 1} of ${pagesData.length}`;
+      btnPrev.disabled = (p === 0);
+      btnNext.disabled = (p === pagesData.length - 1);
+      if (btnNext.disabled) {
+        btnNext.style.background = '#e2e8f0';
+        btnNext.style.color = '#94a3b8';
+        btnNext.style.borderColor = '#cbd5e1';
+      } else {
+        btnNext.style.background = '#2563eb';
+        btnNext.style.color = '#ffffff';
+        btnNext.style.borderColor = '#1d4ed8';
+      }
+    }
+
+    btnNext.addEventListener('click', () => {
+      if (currentPage < pagesData.length - 1) renderPage(currentPage + 1);
+    });
+    btnPrev.addEventListener('click', () => {
+      if (currentPage > 0) renderPage(currentPage - 1);
+    });
+
+    renderPage(0);
+  </script>
+</body>
+</html>

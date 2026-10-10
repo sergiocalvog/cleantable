@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CleanTable Extension - Página de Pruebas y Validación</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --accent: #10b981;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 20px 60px 20px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    header.header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: #ffffff;
+      padding: 28px;
+      border-radius: 12px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    header h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header p {
+      color: #94a3b8;
+      font-size: 14px;
+      max-width: 750px;
+    }
+
+    .instruction-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 13px;
+    }
+
+    .step-card strong {
+      display: block;
+      color: #60a5fa;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .test-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-badge {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* Standard Table Styling */
+    table.demo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    table.demo-table th,
+    table.demo-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+    }
+
+    table.demo-table th {
+      background-color: #f1f5f9;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    table.demo-table tbody tr:hover {
+      background-color: #f8fafc;
+    }
+
+    .num-col {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Pseudo Table (CSS Grid / ARIA) */
+    .pseudo-grid {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 13px;
+    }
+
+    .pseudo-row {
+      display: grid;
+      grid-template-columns: 80px 180px 140px 120px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pseudo-row:last-child {
+      border-bottom: none;
+    }
+
+    .pseudo-row.header-row {
+      background-color: #f1f5f9;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .pseudo-cell {
+      padding: 10px 14px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .pseudo-cell:last-child {
+      border-right: none;
+    }
+
+    /* Clipboard Testing Playground */
+    .playground-box {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 24px;
+    }
+
+    .playground-box h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #1e293b;
+    }
+
+    .playground-box p {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+
+    textarea#pasteArea {
+      width: 100%;
+      height: 110px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 12px;
+      background: #ffffff;
+      color: #0f172a;
+      resize: vertical;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .pill-green { background: #dcfce7; color: #166534; }
+    .pill-blue { background: #dbeafe; color: #1e40af; }
+    .pill-amber { background: #fef3c7; color: #92400e; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header & Guide -->
+    <header class="header">
+      <h1>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="3" y1="9" x2="21" y2="9"></line>
+          <line x1="3" y1="15" x2="21" y2="15"></line>
+          <line x1="9" y1="3" x2="9" y2="21"></line>
+        </svg>
+        CleanTable - Entorno de Pruebas y Validación
+      </h1>
+      <p>
+        Esta página contiene los casos más complejos de tablas web: divisas mezcladas, formatos europeos vs anglosajones,
+        celdas combinadas con <code>colspan</code> y <code>rowspan</code>, caracteres invisibles y pseudo-tablas creadas con <code>div</code> CSS Grid.
+      </p>
+
+      <div class="instruction-steps">
+        <div class="step-card">
+          <strong>Paso 1: Cargar la Extensión</strong>
+          Abre <code>chrome://extensions</code>, activa "Modo de desarrollador" y pulsa "Cargar descomprimida" seleccionando esta carpeta.
+        </div>
+        <div class="step-card">
+          <strong>Paso 2: Abrir CleanTable</strong>
+          Haz clic en el icono de CleanTable en la barra de Chrome. Verás cómo detecta automáticamente todas las tablas de esta página.
+        </div>
+        <div class="step-card">
+          <strong>Paso 3: Exportar y Verificar</strong>
+          Prueba a copiar en TSV (Excel), CSV, JSON, SQL o Markdown y pégalo en el recuadro inferior para ver los datos limpios al instante.
+        </div>
+      </div>
+    </header>
+
+    <!-- TEST 1: E-Commerce & Finanzas (Datos sucios) -->
+    <section class="test-section">
+      <div class="section-title">
+        <span>1. E-Commerce & Finanzas (Divisas, Unidades y Formatos Contables)</span>
+        <span class="section-badge">HTML &lt;table&gt; Nativa</span>
+      </div>
+      <p class="section-desc">
+        Prueba la <strong>Purga de divisas</strong> ($, €, £, %), <strong>descuentos negativos</strong>, formato contable <code>($320.00)</code>
+        y unidades como <code>kg</code> y <code>pcs</code>. Al limpiar, los valores pasan a números limpios para Excel.
+      </p>
+
+      <table class="demo-table" id="ecommerce-financial-table">
+        <caption>Catálogo de Ventas Globales</caption>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th class="num-col">Precio Unitario</th>
+            <th class="num-col">Margen (%)</th>
+            <th class="num-col">Peso / Stock</th>
+            <th class="num-col">Ajuste Contable</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PRD-101</td>
+            <td>Laptop “UltraBook” Pro&nbsp;15"</td>
+            <td class="num-col">$1,299.99</td>
+            <td class="num-col">+24.5%</td>
+            <td class="num-col">1.8 kg</td>
+            <td class="num-col">($45.50)</td>
+            <td><span class="status-pill pill-green">En Stock</span></td>
+          </tr>
+          <tr>
+            <td>PRD-102</td>
+            <td>Monitor Curvo 4K&nbsp;(32”)</td>
+            <td class="num-col">€ 549,90</td>
+            <td class="num-col">+18.0%</td>
+            <td class="num-col">6.2 kg</td>
+            <td class="num-col">€ 0,00</td>
+            <td><span class="status-pill pill-green">En Stock</span></td>
+          </tr>
+          <tr>
+            <td>PRD-103</td>
+            <td>Teclado Mecánico RGB</td>
+            <td class="num-col">£79.50</td>
+            <td class="num-col">+35.2%</td>
+            <td class="num-col">950 g</td>
+            <td class="num-col">-£5.00</td>
+            <td><span class="status-pill pill-blue">Pocas unidades</span></td>
+          </tr>
+          <tr>
+            <td>PRD-104</td>
+            <td>Servidor Blade Rack 2U</td>
+            <td class="num-col">$4,850.00</td>
+            <td class="num-col">+12.4%</td>
+            <td class="num-col">18.5 kg</td>
+            <td class="num-col">($320.00)</td>
+            <td><span class="status-pill pill-amber">Bajo pedido</span></td>
+          </tr>
+          <tr>
+            <td>PRD-105</td>
+            <td>Cables USB-C Blindados (Pack)</td>
+            <td class="num-col">€ 19,95</td>
+            <td class="num-col">+45.0%</td>
+            <td class="num-col">250 pcs</td>
+            <td class="num-col">€ 0,00</td>
+            <td><span class="status-pill pill-green">En Stock</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TEST 2: Colspan y Rowspan Complejos -->
+    <section class="test-section">
+      <div class="section-title">
+        <span>2. Matriz con Celdas Combinadas (Colspan y Rowspan)</span>
+        <span class="section-badge">Alineación 2D</span>
+      </div>
+      <p class="section-desc">
+        La prueba de fuego de los scrapers: cabeceras multinivel con <code>colspan="2"</code> y categorías con <code>rowspan="2"</code>.
+        CleanTable rellena las posiciones en la matriz 2D evitando que las columnas se descuadren o se desplacen al exportar.
+      </p>
+
+      <table class="demo-table" id="matrix-span-table">
+        <caption>Rendimiento Trimestral Consolidado</caption>
+        <thead>
+          <tr>
+            <th rowspan="2">Año</th>
+            <th rowspan="2">División</th>
+            <th colspan="2" style="text-align: center;">Semestre 1 (USD)</th>
+            <th colspan="2" style="text-align: center;">Semestre 2 (USD)</th>
+            <th rowspan="2" class="num-col">Total Anual</th>
+          </tr>
+          <tr>
+            <th class="num-col">Q1</th>
+            <th class="num-col">Q2</th>
+            <th class="num-col">Q3</th>
+            <th class="num-col">Q4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2" style="font-weight: 600; vertical-align: middle;">2025</td>
+            <td>Hardware Cloud</td>
+            <td class="num-col">$125,000</td>
+            <td class="num-col">$142,500</td>
+            <td class="num-col">$138,000</td>
+            <td class="num-col">$160,200</td>
+            <td class="num-col" style="font-weight: 600;">$565,700</td>
+          </tr>
+          <tr>
+            <td>SaaS & Licencias</td>
+            <td class="num-col">$85,400</td>
+            <td class="num-col">$98,000</td>
+            <td class="num-col">$104,500</td>
+            <td class="num-col">$119,300</td>
+            <td class="num-col" style="font-weight: 600;">$407,200</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="font-weight: 600; vertical-align: middle;">2026</td>
+            <td>Hardware Cloud</td>
+            <td class="num-col">$140,000</td>
+            <td class="num-col">$155,800</td>
+            <td class="num-col">$162,000</td>
+            <td class="num-col">$180,500</td>
+            <td class="num-col" style="font-weight: 600;">$638,300</td>
+          </tr>
+          <tr>
+            <td>SaaS & Licencias</td>
+            <td class="num-col">$110,200</td>
+            <td class="num-col">$125,400</td>
+            <td class="num-col">$134,800</td>
+            <td class="num-col">$152,000</td>
+            <td class="num-col" style="font-weight: 600;">$522,400</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TEST 3: Pseudo-tabla moderna con CSS Grid / Flexbox -->
+    <section class="test-section">
+      <div class="section-title">
+        <span>3. Pseudo-Tabla Moderna (div CSS Grid / ARIA)</span>
+        <span class="section-badge">ag-Grid / MUI / Tailwind</span>
+      </div>
+      <p class="section-desc">
+        Construida enteramente con elementos <code>&lt;div&gt;</code> y atributos semánticos <code>role="table"</code>, <code>role="row"</code>
+        y <code>role="gridcell"</code>. CleanTable la detecta automáticamente sin requerir etiquetas <code>&lt;table&gt;</code> nativas.
+      </p>
+
+      <div class="pseudo-grid" role="table" aria-label="Usuarios Activos DataGrid">
+        <div class="pseudo-row header-row" role="row">
+          <div class="pseudo-cell" role="columnheader">ID</div>
+          <div class="pseudo-cell" role="columnheader">Nombre y Apellidos</div>
+          <div class="pseudo-cell" role="columnheader">Departamento</div>
+          <div class="pseudo-cell" role="columnheader">Presupuesto Asignado</div>
+          <div class="pseudo-cell" role="columnheader">Estado de Cuenta</div>
+        </div>
+        <div class="pseudo-row" role="row">
+          <div class="pseudo-cell" role="gridcell">#001</div>
+          <div class="pseudo-cell" role="gridcell">Carlos Mendoza</div>
+          <div class="pseudo-cell" role="gridcell">Ingeniería</div>
+          <div class="pseudo-cell" role="gridcell">€ 14.500,00</div>
+          <div class="pseudo-cell" role="gridcell"><span class="status-pill pill-green">Activo</span></div>
+        </div>
+        <div class="pseudo-row" role="row">
+          <div class="pseudo-cell" role="gridcell">#002</div>
+          <div class="pseudo-cell" role="gridcell">Elena Rostova</div>
+          <div class="pseudo-cell" role="gridcell">Producto</div>
+          <div class="pseudo-cell" role="gridcell">€ 28.750,50</div>
+          <div class="pseudo-cell" role="gridcell"><span class="status-pill pill-green">Activo</span></div>
+        </div>
+        <div class="pseudo-row" role="row">
+          <div class="pseudo-cell" role="gridcell">#003</div>
+          <div class="pseudo-cell" role="gridcell">David Kim</div>
+          <div class="pseudo-cell" role="gridcell">Operaciones</div>
+          <div class="pseudo-cell" role="gridcell">€ 9.200,00</div>
+          <div class="pseudo-cell" role="gridcell"><span class="status-pill pill-amber">Pendiente</span></div>
+        </div>
+        <div class="pseudo-row" role="row">
+          <div class="pseudo-cell" role="gridcell">#004</div>
+          <div class="pseudo-cell" role="gridcell">Sarah O'Connor</div>
+          <div class="pseudo-cell" role="gridcell">Finanzas</div>
+          <div class="pseudo-cell" role="gridcell">€ 45.000,00</div>
+          <div class="pseudo-cell" role="gridcell"><span class="status-pill pill-green">Activo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEST 4: Formato Decimal Europeo Estricto -->
+    <section class="test-section">
+      <div class="section-title">
+        <span>4. Facturación con Formato Europeo (Puntos en miles y Comas en decimales)</span>
+        <span class="section-badge">Normalización Decimal</span>
+      </div>
+      <p class="section-desc">
+        Formatos típicos de España/Europa como <code>1.250.450,75 €</code> que al pegarse en hojas de cálculo anglosajonas se rompen.
+        El normalizador inteligente de CleanTable los convierte de forma transparente a <code>1250450.75</code>.
+      </p>
+
+      <table class="demo-table" id="european-invoicing-table">
+        <thead>
+          <tr>
+            <th>Código Factura</th>
+            <th>Cliente</th>
+            <th class="num-col">Base Imponible</th>
+            <th class="num-col">IVA (21%)</th>
+            <th class="num-col">Total Facturado</th>
+            <th>Fecha Emisión</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FAC-2026-001</td>
+            <td>Iberdrola Clientes S.A.</td>
+            <td class="num-col">1.250.000,00 €</td>
+            <td class="num-col">262.500,00 €</td>
+            <td class="num-col">1.512.500,00 €</td>
+            <td>2026-01-15</td>
+          </tr>
+          <tr>
+            <td>FAC-2026-002</td>
+            <td>Telefónica Digital España</td>
+            <td class="num-col">845.320,50 €</td>
+            <td class="num-col">177.517,31 €</td>
+            <td class="num-col">1.022.837,81 €</td>
+            <td>2026-01-28</td>
+          </tr>
+          <tr>
+            <td>FAC-2026-003</td>
+            <td>Santander Global Tech</td>
+            <td class="num-col">2.410.150,25 €</td>
+            <td class="num-col">506.131,55 €</td>
+            <td class="num-col">2.916.281,80 €</td>
+            <td>2026-02-05</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TEST 5: Tabla con Paginación Dinámica (Función PRO) -->
+    <section class="test-section" id="pagination-test-section">
+      <div class="section-title">
+        <span>5. Tabla Paginada con Botón Siguiente (Función PRO: Auto-Paging)</span>
+        <span class="section-badge" style="background: #fef3c7; color: #92400e; border-color: #fde68a;">⭐ Auto-Paging PRO</span>
+      </div>
+      <p class="section-desc">
+        Esta tabla simula un catálogo o base de datos paginada con 3 páginas. Prueba la función PRO <strong>Auto-Paging</strong> en CleanTable:
+        detectará automáticamente el botón "Siguiente ›", avanzará de página, esperará a que carguen los datos y extraerá las filas consolidadas.
+      </p>
+
+      <div class="table-container">
+        <table class="demo-table" id="paginated-products-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Producto</th>
+              <th>Categoría</th>
+              <th class="num-col">Precio (€)</th>
+              <th class="num-col">Stock</th>
+            </tr>
+          </thead>
+          <tbody id="paginatedTableBody">
+            <!-- Rellenado por JS -->
+          </tbody>
+        </table>
+
+        <!-- Controles de paginación estándar -->
+        <div class="pagination-controls" style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 10px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+          <span id="pageIndicator" style="font-size: 13px; font-weight: 600; color: #475569;">Página 1 de 3</span>
+          <div style="display: flex; gap: 8px;">
+            <button id="btnPrevPage" class="pagination-btn" style="padding: 6px 14px; font-size: 12px; font-weight: 600; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;" disabled>‹ Anterior</button>
+            <button id="btnNextPage" class="pagination-btn next" rel="next" aria-label="Siguiente" style="padding: 6px 14px; font-size: 12px; font-weight: 600; background: #2563eb; color: #ffffff; border: 1px solid #1d4ed8; border-radius: 4px; cursor: pointer;">Siguiente ›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Playground de Pegado In-Situ -->
+    <div class="playground-box">
+      <h3>Zona de Validación Rápida (Pega aquí con Ctrl + V)</h3>
+      <p>
+        No necesitas abrir Excel o Google Sheets para comprobarlo. Pulsa cualquier botón de copia en CleanTable
+        (TSV, CSV, JSON, SQL o Markdown) y pega el resultado directamente en este cuadro:
+      </p>
+      <textarea id="pasteArea" placeholder="Haz clic aquí y pulsa Ctrl+V (o Cmd+V) para inspeccionar los datos limpios copiados al portapapeles..."></textarea>
+    </div>
+  </div>
+
+  <script>
+    const pagesData = [
+      [
+        ["PRD-001", "MacBook Pro 16\"", "Hardware", "2.799,00 €", "14"],
+        ["PRD-002", "Dell UltraSharp 32\"", "Monitores", "849,50 €", "28"],
+        ["PRD-003", "Teclado Mecánico RGB", "Accesorios", "129,99 €", "85"],
+        ["PRD-004", "Ratón Ergonómico MX", "Accesorios", "89,00 €", "112"]
+      ],
+      [
+        ["PRD-005", "Servidor Dell PowerEdge", "Servidores", "4.850,00 €", "6"],
+        ["PRD-006", "Switch Cisco 48 Puertos", "Redes", "1.320,75 €", "19"],
+        ["PRD-007", "Punto de Acceso WiFi 6", "Redes", "240,00 €", "44"],
+        ["PRD-008", "SAI Online 3000VA", "Energía", "920,50 €", "11"]
+      ],
+      [
+        ["PRD-009", "Docking Station Thunderbolt", "Accesorios", "219,00 €", "53"],
+        ["PRD-010", "Auriculares Cancelación Ruido", "Audio", "349,90 €", "37"],
+        ["PRD-011", "Cámara Web 4K Pro", "Video", "175,00 €", "64"],
+        ["PRD-012", "Brazo Ergonómico Monitor", "Mobiliario", "99,00 €", "78"]
+      ]
+    ];
+
+    let currentPage = 0;
+    const tbody = document.getElementById('paginatedTableBody');
+    const pageIndicator = document.getElementById('pageIndicator');
+    const btnPrev = document.getElementById('btnPrevPage');
+    const btnNext = document.getElementById('btnNextPage');
+
+    function renderPage(p) {
+      currentPage = p;
+      tbody.innerHTML = '';
+      pagesData[p].forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row[0]}</td>
+          <td>${row[1]}</td>
+          <td>${row[2]}</td>
+          <td class="num-col">${row[3]}</td>
+          <td class="num-col">${row[4]}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      pageIndicator.textContent = `Página ${p + 1} de ${pagesData.length}`;
+      btnPrev.disabled = (p === 0);
+      btnNext.disabled = (p === pagesData.length - 1);
+      if (btnNext.disabled) {
+        btnNext.style.background = '#e2e8f0';
+        btnNext.style.color = '#94a3b8';
+        btnNext.style.borderColor = '#cbd5e1';
+      } else {
+        btnNext.style.background = '#2563eb';
+        btnNext.style.color = '#ffffff';
+        btnNext.style.borderColor = '#1d4ed8';
+      }
+    }
+
+    btnNext.addEventListener('click', () => {
+      if (currentPage < pagesData.length - 1) renderPage(currentPage + 1);
+    });
+    btnPrev.addEventListener('click', () => {
+      if (currentPage > 0) renderPage(currentPage - 1);
+    });
+
+    renderPage(0);
+  </script>
+</body>
+</html>

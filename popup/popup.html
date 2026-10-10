@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CleanTable</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="3" y1="15" x2="21" y2="15"></line>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">CleanTable</h1>
+          <span class="brand-badge">v1.0.0</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btnProBadge" class="pro-pill" title="CleanTable PRO">⭐ PRO</button>
+        <button id="btnLangToggle" class="lang-pill" title="Switch Language / Cambiar Idioma">EN</button>
+        <button id="btnRescan" class="icon-btn" title="Rescan Page" aria-label="Rescan Page">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <div class="empty-icon">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="9" y1="13" x2="15" y2="13"></line>
+          <line x1="9" y1="17" x2="15" y2="17"></line>
+        </svg>
+      </div>
+      <h3 class="empty-title" data-i18n="noTablesFound">No tables detected on this page</h3>
+      <p class="empty-desc" data-i18n="noTablesHint">Navigate to a page containing HTML or CSS grid tables, or scroll down to load dynamic content.</p>
+      <button id="btnEmptyRescan" class="btn btn-primary btn-sm" data-i18n="rescanBtn">Rescan Page</button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="mainContent" class="main-content">
+      <!-- Table Selector Bar -->
+      <section class="section-group">
+        <div class="section-label-row">
+          <label for="tableSelect" class="section-label" data-i18n="selectTableLabel">Detected Tables</label>
+          <span id="tableCounterBadge" class="badge">0</span>
+        </div>
+        <div class="selector-row">
+          <div class="select-wrapper">
+            <select id="tableSelect" aria-label="Select Table"></select>
+          </div>
+          <button id="btnHighlight" class="icon-btn highlight-btn" title="Highlight on page" aria-label="Highlight table on page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Preview Section -->
+      <section class="section-group preview-section">
+        <div class="section-label-row">
+          <span class="section-label" data-i18n="livePreview">Live Preview</span>
+          <span class="preview-notice" data-i18n="previewNotice">Showing first 5 rows</span>
+        </div>
+        <div id="previewContainer" class="table-preview-scroll">
+          <table id="previewTable" class="preview-table"></table>
+        </div>
+      </section>
+
+      <!-- Cleaning Options Accordion -->
+      <section class="section-group accordion-group">
+        <button id="optionsToggle" class="accordion-header" aria-expanded="true">
+          <div class="accordion-title-wrapper">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+            </svg>
+            <span class="accordion-title" data-i18n="cleaningOptions">Cleaning Options</span>
+          </div>
+          <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+
+        <div id="optionsBody" class="accordion-body">
+          <!-- Option: Purge Currency -->
+          <div class="option-row">
+            <label class="toggle-control">
+              <input type="checkbox" id="optPurgeCurrency" checked>
+              <span class="control-label" data-i18n="optPurgeCurrency">Purge currency symbols & units</span>
+            </label>
+            <span class="option-hint" data-i18n="optPurgeCurrencyHint">Strips $, €, £, %, kg, lbs, preserving numbers</span>
+          </div>
+
+          <!-- Option: Normalize Numbers -->
+          <div class="option-row">
+            <label for="optNormalizeNumbers" class="control-label" data-i18n="optNormalizeNumbers">Normalize decimal & thousands</label>
+            <div class="select-wrapper select-wrapper-sm">
+              <select id="optNormalizeNumbers">
+                <option value="auto" selected data-i18n="numFormatAuto">Auto Detect (Recommended)</option>
+                <option value="us" data-i18n="numFormatUS">US / UK (1,250.50 → 1250.50)</option>
+                <option value="eu" data-i18n="numFormatEU">European (1.250,50 → 1250.50)</option>
+                <option value="none" data-i18n="numFormatNone">Keep original separators</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Option: Sanitize Invisible -->
+          <div class="option-row">
+            <label class="toggle-control">
+              <input type="checkbox" id="optSanitizeInvisible" checked>
+              <span class="control-label" data-i18n="optSanitizeInvisible">Sanitize invisible chars & line breaks</span>
+            </label>
+            <span class="option-hint" data-i18n="optSanitizeInvisibleHint">Removes &nbsp;, curly quotes, and cell newlines</span>
+          </div>
+
+          <!-- Option: Header formatting -->
+          <div class="option-row">
+            <label for="optHeaderCase" class="control-label" data-i18n="optHeaderCase">Header formatting</label>
+            <div class="select-wrapper select-wrapper-sm">
+              <select id="optHeaderCase">
+                <option value="none" selected data-i18n="headerCaseNone">Original (Cleaned & Trimmed)</option>
+                <option value="snake" data-i18n="headerCaseSnake">snake_case (database friendly)</option>
+                <option value="camel" data-i18n="headerCaseCamel">camelCase (code friendly)</option>
+                <option value="kebab" data-i18n="headerCaseKebab">kebab-case (url/tag friendly)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Option: Trim whitespace -->
+          <div class="option-row">
+            <label class="toggle-control">
+              <input type="checkbox" id="optTrimWhitespace" checked>
+              <span class="control-label" data-i18n="optTrimWhitespace">Trim outer spaces</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pro Tools Strip -->
+      <section class="section-group pro-tools-section">
+        <div class="pro-tools-row">
+          <button id="btnAutoPage" class="btn btn-pro-tool" title="Auto-extract multiple pages with pagination">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span data-i18n="btnAutoPage">Auto-Paging</span>
+            <span class="pro-tag">PRO</span>
+          </button>
+          <button id="btnBatchExport" class="btn btn-pro-tool" title="Export all detected tables at once">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+            <span data-i18n="btnBatchExport">Batch Export</span>
+            <span class="pro-tag">PRO</span>
+          </button>
+        </div>
+        <div id="autoPageStatus" class="autopage-status-panel" style="display: none;">
+          <div class="autopage-status-info">
+            <div class="spinner-sm"></div>
+            <span id="autoPageStatusText" class="autopage-text">Scraping page 1...</span>
+          </div>
+          <button id="btnStopAutoPage" class="btn btn-danger-sm" data-i18n="btnStop">Stop</button>
+        </div>
+      </section>
+
+      <!-- Export Actions -->
+      <section class="section-group export-section">
+        <span class="section-label" data-i18n="exportTitle">One-Click Exports</span>
+        
+        <!-- Primary TSV Button for Excel/Sheets -->
+        <button id="btnCopyTsv" class="btn btn-primary btn-block">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span data-i18n="btnCopyTsv">Copy for Sheets / Excel</span>
+          <span class="btn-tag">TSV</span>
+        </button>
+
+        <!-- PRO Native XLSX Button -->
+        <button id="btn-download-xlsx" class="btn btn-pro btn-block">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="8" y1="13" x2="16" y2="17"></line>
+            <line x1="16" y1="13" x2="8" y2="17"></line>
+          </svg>
+          <span data-i18n="btnDownloadXlsx">Download Excel (.xlsx)</span>
+          <span class="pro-tag">PRO</span>
+        </button>
+
+        <!-- Symmetric Export Grid -->
+        <div class="export-grid">
+          <!-- Fila 1: CSV -->
+          <button id="btn-copy-csv" class="btn btn-secondary">
+            <span data-i18n="btnCopyCsv">Copy CSV</span>
+          </button>
+          <button id="btn-download-csv" class="btn btn-secondary btn-download">
+            <svg class="download-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span data-i18n="btnDownloadCsv">Download CSV</span>
+          </button>
+
+          <!-- Fila 2: JSON -->
+          <button id="btn-copy-json" class="btn btn-secondary">
+            <span data-i18n="btnCopyJson">Copy JSON</span>
+          </button>
+          <button id="btn-download-json" class="btn btn-secondary btn-download">
+            <svg class="download-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span data-i18n="btnDownloadJson">Download JSON</span>
+          </button>
+
+          <!-- Fila 3: SQL -->
+          <button id="btn-copy-sql" class="btn btn-secondary">
+            <span data-i18n="btnCopySql">Copy SQL INSERT</span>
+          </button>
+          <button id="btn-download-sql" class="btn btn-secondary btn-download">
+            <svg class="download-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span data-i18n="btnDownloadSql">Download SQL</span>
+          </button>
+
+          <!-- Fila 4: Markdown (Full width) -->
+          <button id="btn-copy-markdown" class="btn btn-secondary btn-markdown col-span-2">
+            <span data-i18n="btnCopyMarkdown">Copy Markdown</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating Toast Notification -->
+    <div id="toast" class="toast" role="status" aria-live="polite">
+      <svg class="toast-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span id="toastMsg" class="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <!-- Auto-Paging Configuration Modal -->
+    <div id="autoPageModal" class="modal-backdrop" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="autoPageModalTitle">
+      <div class="modal-card modal-card-sm">
+        <button id="btnAutoPageModalClose" class="modal-close-btn" aria-label="Close">&times;</button>
+        <div class="modal-header">
+          <h2 id="autoPageModalTitle" class="modal-title" data-i18n="btnAutoPage">Auto-Paging</h2>
+          <p class="modal-subtitle" data-i18n="autoPageSub">Extract multi-page tables automatically</p>
+        </div>
+        <div class="autopage-dialog-body">
+          <label for="inputAutoPages" class="license-label" data-i18n="promptAutoPages">How many pages to scrape automatically? (1-20):</label>
+          <div class="autopage-input-row">
+            <button id="btnPagesMinus" class="btn btn-secondary btn-sm" type="button">−</button>
+            <input type="number" id="inputAutoPages" min="2" max="20" value="5" />
+            <button id="btnPagesPlus" class="btn btn-secondary btn-sm" type="button">+</button>
+          </div>
+          <div class="autopage-dialog-actions">
+            <button id="btnAutoPageCancel" class="btn btn-secondary" data-i18n="btnCancel">Cancel</button>
+            <button id="btnAutoPageConfirm" class="btn btn-primary" data-i18n="btnStartScraping">Start Scraping</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pro Monetization Modal -->
+    <div id="proModal" class="modal-backdrop" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="proModalTitle">
+      <div class="modal-card">
+        <button id="btnProClose" class="modal-close-btn" aria-label="Close">&times;</button>
+        
+        <div class="modal-header">
+          <div class="pro-icon-glow">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <h2 id="proModalTitle" class="modal-title" data-i18n="proModalTitle">CleanTable PRO</h2>
+          <p class="modal-subtitle" data-i18n="proModalSubtitle">Unlock professional exports & automated scraping</p>
+        </div>
+
+        <div class="pro-features-list">
+          <div class="pro-feature-item">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong data-i18n="proFeat1Title">Native Excel (.xlsx)</strong>
+              <p data-i18n="proFeat1Desc">True typed numbers and spreadsheets without security warnings.</p>
+            </div>
+          </div>
+          <div class="pro-feature-item">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong data-i18n="proFeat2Title">Smart Auto-Paging</strong>
+              <p data-i18n="proFeat2Desc">Automatically traverse pagination and scrape multi-page tables.</p>
+            </div>
+          </div>
+          <div class="pro-feature-item">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong data-i18n="proFeat3Title">Batch Table Export</strong>
+              <p data-i18n="proFeat3Desc">Export all tables on the page at once into a multi-tab workbook.</p>
+            </div>
+          </div>
+          <div class="pro-feature-item">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong data-i18n="proFeat4Title">Lifetime License</strong>
+              <p data-i18n="proFeat4Desc">One-time payment, no recurring subscriptions or monthly fees.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PayPal Payment CTA & Urgency Pricing Block -->
+        <div class="paypal-cta-block">
+          <!-- Urgency Banner -->
+          <div class="urgency-banner">
+            <span class="urgency-fire">🔥</span>
+            <span class="urgency-text" data-i18n="proUrgencyBanner">Launch Special: 60% OFF (Limited Time)</span>
+          </div>
+
+          <!-- Price Anchor Row -->
+          <div class="pricing-anchor-box">
+            <div class="price-left">
+              <span class="price-strikethrough">$24.99</span>
+              <span class="discount-pill" data-i18n="proDiscountBadge">-60% OFF</span>
+            </div>
+            <div class="price-right">
+              <span class="price-current">$9.99</span>
+              <span class="price-currency">USD</span>
+            </div>
+          </div>
+          <div class="pricing-caption" data-i18n="proPricingCaption">⚡ One-time lifetime payment · No monthly subscriptions</div>
+
+          <a id="btnPaypalLink" href="https://paypal.me/imagenesbiblia/9.99" target="_blank" rel="noopener noreferrer" class="btn btn-paypal">
+            <svg class="paypal-logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.067 8.478c.492.315.844.82.96 1.438.487 2.585-1.127 5.084-3.6 5.58-.337.067-.687.104-1.04.104h-1.85a.91.91 0 0 0-.9.768l-.873 5.53a.69.69 0 0 1-.685.582H8.385a.555.555 0 0 1-.548-.641l.345-2.189.654-4.145.228-1.442a.91.91 0 0 1 .9-.768h2.09c3.08 0 5.5-1.25 6.208-4.618.356-1.696.06-3.085-.858-4.047l.08.03c1.782.597 2.898 2.074 2.578 4.329z"/>
+              <path d="M17.427 6.478c-.707 3.368-3.128 4.618-6.208 4.618h-2.09a.91.91 0 0 0-.9.768l-1.227 7.776a.555.555 0 0 1-.548.468H2.76a.555.555 0 0 1-.548-.642L5.27 3.73a.91.91 0 0 1 .9-.768h6.425c3.08 0 5.25.962 5.86 3.86.06.28.08.57.08.86 0 .28-.05.57-.108.796z"/>
+            </svg>
+            <span data-i18n="btnPaypalCta">Pay $9.99 with PayPal</span>
+          </a>
+          <div class="payment-methods-strip">
+            <span class="pay-method-badge">PayPal</span>
+          </div>
+          <span class="paypal-secure-note" data-i18n="paypalSecureNote">🔒 Official PayPal checkout · Instant unlock</span>
+        </div>
+
+        <!-- License Key Activation -->
+        <div class="license-activation-box">
+          <label for="proLicenseInput" class="license-label" data-i18n="licenseInputLabel">Already paid? Enter your PayPal Transaction ID:</label>
+          <div class="license-input-row">
+            <input type="text" id="proLicenseInput" placeholder="Transaction ID (17 characters)" data-i18n-placeholder="proLicensePlaceholder" spellcheck="false" autocomplete="off" />
+            <button id="btnActivateLicense" class="btn btn-primary btn-sm" data-i18n="btnActivate">Activate</button>
+          </div>
+          <p class="license-help-tip" data-i18n="paypalTxHint">💡 You'll find your Transaction ID (17 alphanumeric characters code) on the PayPal receipt screen or confirmation email.</p>
+          <div id="licenseFeedback" class="license-feedback"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/licenseManager.js"></script>
+  <script src="../scripts/tableCleaner.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Agent & AI local skills and artifacts
+.agents/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and environment
+*.log
+.env
+.env.local
