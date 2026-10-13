@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   const TRANSLATIONS = {
     en: {
-      appName: "CleanTable - Copy Web Tables to Excel & Sheets",
-      appDesc: "Extract and clean HTML tables instantly. Copy clean data to Excel, Google Sheets, JSON, SQL & Markdown without currency symbols or broken formats.",
+      appName: "CleanTable - Copy Tables to Excel & Sheets",
+      appDesc: "Easily detect, clean, and copy web tables into spreadsheets without broken formats or currency symbols.",
       selectTableLabel: "Detected Tables",
       noTablesFound: "No tables detected on this page",
       noTablesHint: "Navigate to a page containing HTML or CSS grid tables, or scroll down to load dynamic content.",
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     },
     es: {
       appName: "CleanTable - Copiar Tablas a Excel y Sheets",
-      appDesc: "Extrae y limpia tablas web al instante. Pasa datos limpios a Excel, Google Sheets, JSON, SQL y Markdown sin símbolos de moneda ni errores.",
+      appDesc: "Detecta, limpia y copia tablas web a hojas de cálculo fácilmente, sin símbolos de moneda ni formatos rotos.",
       selectTableLabel: "Tablas Detectadas",
       noTablesFound: "No se detectaron tablas en esta página",
       noTablesHint: "Navega a una página con tablas HTML o CSS grid, o haz scroll para cargar contenido dinámico.",

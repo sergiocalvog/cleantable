@@ -4,7 +4,7 @@
     "description": "Nombre de la extensión"
   },
   "appDesc": {
-    "message": "Extrae, limpia y exporta tablas web a Excel, Google Sheets, CSV, JSON y SQL sin símbolos de moneda ni formatos rotos.",
+    "message": "Detecta, limpia y copia tablas web a hojas de cálculo fácilmente, sin símbolos de moneda ni formatos rotos.",
     "description": "Descripción corta de la extensión"
   },
   "selectTableLabel": {

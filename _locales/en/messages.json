@@ -4,7 +4,7 @@
     "description": "Name of the extension"
   },
   "appDesc": {
-    "message": "Extract, clean and export web tables to Excel, Google Sheets, CSV, JSON and SQL without broken formats or currency symbols.",
+    "message": "Easily detect, clean, and copy web tables into spreadsheets without broken formats or currency symbols.",
     "description": "Short description of the extension"
   },
   "selectTableLabel": {
